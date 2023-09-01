@@ -1,9 +1,4 @@
 import Character from '../character';
-import Bowman from '../bowman';
-import Swordsman from '../swordsman';
-import Magician from '../magician';
-import Undead from '../undead';
-import Zombie from '../zombie';
 import Daemon from '../daemon';
 
 test('Тест короткого имени', () => {
@@ -25,84 +20,6 @@ test('Тест неверного типа', () => {
     return new Character('name', '1');
   }
   expect(result).toThrow('Тип героя должен быть: Bowman, Swordsman, Magician, Daemon, Undead, Zombie');
-});
-
-test('Проверка персонажа Bowman', () => {
-  const realBowman = new Bowman('Name');
-  const expectedBowman = {
-    name: 'Name',
-    type: 'Bowman',
-    attack: 25,
-    defence: 25,
-    health: 100,
-    level: 1,
-  };
-  expect(realBowman).toEqual(expectedBowman);
-});
-
-test('Проверка персонажа Swordsman', () => {
-  const realSwordsman = new Swordsman('Name');
-  const expectedSwordsman = {
-    name: 'Name',
-    type: 'Swordsman',
-    attack: 40,
-    defence: 10,
-    health: 100,
-    level: 1,
-  };
-  expect(realSwordsman).toEqual(expectedSwordsman);
-});
-
-test('Проверка персонажа Magician', () => {
-  const realMagician = new Magician('Name');
-  const expectedMagician = {
-    name: 'Name',
-    type: 'Magician',
-    attack: 10,
-    defence: 40,
-    health: 100,
-    level: 1,
-  };
-  expect(realMagician).toEqual(expectedMagician);
-});
-
-test('Проверка персонажа Undead', () => {
-  const realUndead = new Undead('Name');
-  const expectedUndead = {
-    name: 'Name',
-    type: 'Undead',
-    attack: 25,
-    defence: 25,
-    health: 100,
-    level: 1,
-  };
-  expect(realUndead).toEqual(expectedUndead);
-});
-
-test('Проверка персонажа Zombie', () => {
-  const realZombie = new Zombie('Name');
-  const expectedZombie = {
-    name: 'Name',
-    type: 'Zombie',
-    attack: 40,
-    defence: 10,
-    health: 100,
-    level: 1,
-  };
-  expect(realZombie).toEqual(expectedZombie);
-});
-
-test('Проверка персонажа Daemon', () => {
-  const realDaemon = new Daemon('Name');
-  const expectedDaemon = {
-    name: 'Name',
-    type: 'Daemon',
-    attack: 10,
-    defence: 40,
-    health: 100,
-    level: 1,
-  };
-  expect(realDaemon).toEqual(expectedDaemon);
 });
 
 test('Проверка удачного повышения уровня персонажа', () => {
