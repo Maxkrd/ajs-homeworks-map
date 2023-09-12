@@ -1,22 +1,18 @@
-import sortObject from '../app';
+import Validator from '../app';
 
-const obj = {
-  name: 'мечник',
-  health: 10,
-  level: 2,
-  attack: 80,
-  defence: 40,
-};
-
-test('Проверка сортировки объекта.', () => {
-  const input = sortObject(obj, ['name', 'level']);
-  const result = [
-    { key: 'name', value: 'мечник' },
-    { key: 'level', value: 2 },
-    { key: 'attack', value: 80 },
-    { key: 'defence', value: 40 },
-    { key: 'health', value: 10 },
-  ];
-
-  expect(input).toEqual(result);
+test.each([
+  ['User', true],
+  ['Us-er', true],
+  ['Us_er', true],
+  ['Use111r', true],
+  ['Use4444r', false],
+  ['1User', false],
+  ['User1', false],
+  ['_User', false],
+  ['User_', false],
+  ['-User', false],
+  ['User-', false],
+])('Проверка имени пользователя', (nickname, expected) => {
+  const result = new Validator(nickname).validateUsername();
+  expect(result).toBe(expected);
 });

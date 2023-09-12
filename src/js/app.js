@@ -1,15 +1,13 @@
-export default function orderByProps(object, props) {
-  const result = [];
-  for (const prop in object) {
-    if (props.includes(prop)) {
-      result.push({ key: prop, value: object[prop] });
-    }
+export default class Validator {
+  constructor(nickname) {
+    this.nickname = nickname;
   }
-  const sortedProps = Object.keys(object).sort();
-  for (const prop of sortedProps) {
-    if (!props.includes(prop)) {
-      result.push({ key: prop, value: object[prop] });
-    }
+
+  validateUsername() {
+    const reg1 = /^[\w-]*$/.test(this.nickname);
+    const reg2 = !/(\d{4,})+/g.test(this.nickname);
+    const reg3 = /^[^\d-_].*[^\d-_]$/.test(this.nickname);
+    const result = reg1 && reg2 && reg3;
+    return result;
   }
-  return result;
 }
