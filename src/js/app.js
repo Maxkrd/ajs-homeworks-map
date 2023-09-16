@@ -1,13 +1,23 @@
-export default class Validator {
-  constructor(nickname) {
-    this.nickname = nickname;
+export default class Team {
+  constructor() {
+    this.members = new Set();
   }
 
-  validateUsername() {
-    const reg1 = /^[\w-]*$/.test(this.nickname);
-    const reg2 = !/(\d{4,})+/g.test(this.nickname);
-    const reg3 = /^[^\d-_].*[^\d-_]$/.test(this.nickname);
-    const result = reg1 && reg2 && reg3;
-    return result;
+  add(hero) {
+    if (!this.members.has(hero)) {
+      this.members.add(hero);
+    } else {
+      throw new Error('Персонаж уже существует в команде');
+    }
+  }
+
+  addAll(...charactersList) {
+    for (const obj of charactersList) {
+      this.members.add(obj);
+    }
+  }
+
+  toArray() {
+    return [...this.members];
   }
 }
