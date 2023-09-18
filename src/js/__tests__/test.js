@@ -1,48 +1,19 @@
-import Team from '../app';
+import ErrorRepository from '../app';
 
-class Character {
-  constructor(name) {
-    this.name = name;
-  }
-}
+const err = new ErrorRepository();
 
-const hero = new Character('User1');
-const hero1 = new Character('User2');
-const hero2 = new Character('User3');
-const linkHero = hero;
-
-test('Test - дублирование персонажа', () => {
-  const comand = new Team();
-  comand.add(hero1);
-  expect(() => {
-    comand.add(hero1);
-  }).toThrow(Error);
+test('Проверка имени персонажа', () => {
+  expect(err.translate(1)).toBe('Персонаж не найден');
 });
 
-test('Test Ошибки', () => {
-  const comand = new Team();
-  expect(() => {
-    comand.add(hero1);
-    comand.add(hero);
-  }).not.toThrow(Error);
+test('Проверка количества букв в имени', () => {
+  expect(err.translate(2)).toBe('Неверное количество букв в имени');
 });
 
-test('Test Ошибки', () => {
-  const comand = new Team();
-  comand.add(hero);
-  expect(() => {
-    comand.add(linkHero);
-  }).toThrow(Error);
+test('Проверка типа персонажа', () => {
+  expect(err.translate(3)).toBe('Неверный тип персонажа');
 });
 
-test('Test addAll', () => {
-  const comand = new Team();
-  comand.addAll(hero, hero1);
-  expect(comand.toArray()).toEqual([hero, hero1]);
-});
-
-test('Тест дублированния в массиве', () => {
-  const comand = new Team();
-  comand.addAll(hero, linkHero, hero1, hero2);
-  expect(comand.toArray()).toEqual([hero, hero1, hero2]);
+test('Проверка Unknown error', () => {
+  expect(err.translate(4)).toBe('Unknown error');
 });

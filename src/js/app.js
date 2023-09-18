@@ -1,23 +1,12 @@
-export default class Team {
+export default class ErrorRepository {
   constructor() {
-    this.members = new Set();
+    this.errors = new Map();
+    this.errors.set(1, 'Персонаж не найден');
+    this.errors.set(2, 'Неверное количество букв в имени');
+    this.errors.set(3, 'Неверный тип персонажа');
   }
 
-  add(hero) {
-    if (!this.members.has(hero)) {
-      this.members.add(hero);
-    } else {
-      throw new Error('Персонаж уже существует в команде');
-    }
-  }
-
-  addAll(...charactersList) {
-    for (const obj of charactersList) {
-      this.members.add(obj);
-    }
-  }
-
-  toArray() {
-    return [...this.members];
+  translate(code) {
+    return this.errors.get(code) || 'Unknown error';
   }
 }
